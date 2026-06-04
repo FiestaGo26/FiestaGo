@@ -1,4 +1,4 @@
-import { createBrowserClient, createServerClient } from '@supabase/ssr'
+import { createBrowserClient, createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -112,7 +112,9 @@ export function createServerSupabaseClient() {
     {
       cookies: {
         getAll()         { return cookieStore.getAll() },
-        setAll(cs)       { cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options)) },
+        setAll(cs: { name: string; value: string; options: CookieOptions }[]) {
+          cs.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
+        },
       },
     }
   )

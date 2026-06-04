@@ -1,5 +1,13 @@
+import './globals.css'
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import type { Metadata } from 'next'
+import { Toaster } from 'react-hot-toast'
+
+export const metadata: Metadata = {
+  title: 'FiestaGo · El marketplace de celebraciones',
+  description: 'El marketplace de celebraciones #1 en España.',
+}
 
 function Navbar() {
   return (
@@ -67,12 +75,17 @@ function Footer() {
   )
 }
 
-export default function PublicLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar/>
-      <div className="flex-1">{children}</div>
-      <Footer/>
-    </div>
+    <html lang="es">
+      <body>
+        <div className="flex flex-col min-h-screen">
+          <Navbar/>
+          <div className="flex-1">{children}</div>
+          <Footer/>
+        </div>
+        <Toaster position="top-center" />
+      </body>
+    </html>
   )
 }
